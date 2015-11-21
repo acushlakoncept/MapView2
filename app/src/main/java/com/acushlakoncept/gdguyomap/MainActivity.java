@@ -16,11 +16,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
     ImageButton FAB;
     Button mBtn;
     MyLocation mLocation;
     String lat, lng;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +34,6 @@ public class MainActivity extends AppCompatActivity {
         mLocation = new MyLocation(this);
         locationFetcher();
 
-       /* mBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                // Starting new intent
-                if(isOnline()){
-
-                   *//*Toast.makeText(getActivity().getBaseContext(), "You clicked "+ keywords[position]
-                           + " from " + lat + " , " + lng, Toast.LENGTH_SHORT).show();*//*
-
-                    Intent intent = new Intent(getBaseContext(), MapsActivity.class)
-                            .putExtra("lat", lat)
-                            .putExtra("lng", lng);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getBaseContext(), "Network Isn't Available", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -65,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // Starting new intent
-                if(isOnline()){
+                if (isOnline()) {
 
                     Intent intent = new Intent(getBaseContext(), MapsActivity.class)
                             .putExtra("lat", lat)
@@ -103,13 +83,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnectedOrConnecting()){
-            return true;
-        } else {
-            return false;
-        }
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
     public void locationFetcher() {
